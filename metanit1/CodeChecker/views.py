@@ -85,7 +85,6 @@ def save_completed_task(user, task_id):
 def iscorrect(code, task_id, user):
     task = Task.objects.get(pk=task_id)
 
-    # Check if the user has already completed the task
     if Task_completed.objects.filter(Customuser=user, Task_id=task_id).exists():
         return "Уже выполнено"
 
@@ -93,7 +92,6 @@ def iscorrect(code, task_id, user):
     is_correct = expected_input in code.strip()
 
     if is_correct:
-        # Save the completed task only if it hasn't been completed before
         save_completed_task(user, task_id)
 
     return "Правильно" if is_correct else "Неправильно"
@@ -113,21 +111,17 @@ def run_task_code(request, task_id):
         output = ""
 
         try:
-            # Redirect stdout to capture output
             original_stdout = sys.stdout
             sys.stdout = sys.stderr = sys.stdout = sys.stderr = io.StringIO()
 
-            # Используем exec с locals() и globals() для получения результатов выполнения кода
             exec(codeareadata, globals(), locals())
 
-            # Retrieve the captured output
             output = sys.stdout.getvalue()
 
         except Exception as e:
             output = str(f"{codeareadata} is not correct")
 
         finally:
-            # Reset stdout
             sys.stdout = original_stdout
 
     return render(request, 'task_detail.html', {"task": task, "code": codeareadata, "output": output, "iscorrect": iscorrect(codeareadata, task.id, request.user)})
@@ -225,9 +219,6 @@ def signin(request):
 
 def profile(request):
     return render(request, 'profile.html')
-
-def progress(request):
-    return render(request, 'progress.html')
 
 def user_logout(request):
     logout(request)

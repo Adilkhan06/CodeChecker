@@ -4,17 +4,17 @@
 {% block content %}
     <div class="user-profile-container">
         <div class="user-profile-card">
-            <h1 class="user-profile-heading">User Profile</h1>
+            <h1 class="user-profile-heading">Профиль</h1>
 
             {% if user %}
                 <div class="user-profile-info">
-                    <p><strong>Login:</strong> {{ user.username }}</p>
-                    <p><strong>Tasks Completed:</strong> {{ user.tasks_completed }}</p>
-                    <p><strong>Last Login:</strong> {{ user.last_login }}</p>
+                    <p><strong>Логин:</strong> {{ user.username }}</p>
+                    <p><strong>Выполненные задания:</strong> {{ user.tasks_completed }}</p>
+                    <p><strong>Последний вход:</strong> {{ user.last_login }}</p>
                 </div>
-                <p><a href="{% url 'edit_profile' %}">Edit Profile</a></p>
+                <p><a href="{% url 'edit_profile' %}">Редактировать профиль</a></p>
             {% else %}
-                <p class="user-not-found">User not found</p>
+                <p class="user-not-found">Пользователь не найден</p>
             {% endif %}
         </div>
     </div>

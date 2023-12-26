@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="task-list-container">
+    <section class="task-list-section">
+      <h2 class="task-list-heading">Список заданий</h2>
+      <ul class="custom-task-list">
+        {% for task in tasks %}
+          <li class="custom-task-item">
+            <h3>{{ task.title }}</h3>
+            <p>{{ task.description }}</p>
+            <a href="{{ task.link }}" class="custom-task-link btn btn-primary">Перейти к заданию</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+
+{% endblock %}

@@ -59,6 +59,9 @@ class CustomUser(AbstractUser):
         verbose_name='user permissions',
     )
 
+    def get_completed_task_ids(self):
+        return Task_completed.objects.filter(Customuser=self).values_list('Task_id', flat=True)
+
 
 class Task_completed(models.Model):
     Customuser = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

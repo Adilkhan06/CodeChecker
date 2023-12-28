@@ -9,7 +9,14 @@
             {% if user %}
                 <div class="user-profile-info">
                     <p><strong>Логин:</strong> {{ user.username }}</p>
-                    <p><strong>Выполненные задания:</strong> {{ user.tasks_completed }}</p>
+                    <p><strong>Выполненные задания:</strong></p>
+    <ul>
+        {% for task_id in user.get_completed_task_ids %}
+            <li><a href="{% url 'task_detail' task_id %}">Задание {{ task_id }}</a></li>
+        {% empty %}
+            <li>Нет выполненных заданий.</li>
+        {% endfor %}
+    </ul>
                     <p><strong>Последний вход:</strong> {{ user.last_login }}</p>
                 </div>
                 <p><a href="{% url 'edit_profile' %}">Редактировать профиль</a></p>

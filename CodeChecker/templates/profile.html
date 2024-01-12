@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="user-profile-container">
+        <div class="user-profile-card">
+            <h1 class="user-profile-heading">Профиль</h1>
+
+            {% if user %}
+                <div class="user-profile-info">
+                    <p><strong>Логин:</strong> {{ user.username }}</p>
+                    <p><strong>Выполненные задания:</strong></p>
+    <ul>
+        {% for task_id in user.get_completed_task_ids %}
+            <li><a href="{% url 'task_detail' task_id %}">Задание {{ task_id }}</a></li>
+        {% empty %}
+            <li>Нет выполненных заданий.</li>
+        {% endfor %}
+    </ul>
+                    <p><strong>Последний вход:</strong> {{ user.last_login }}</p>
+                </div>
+                <p><a href="{% url 'edit_profile' %}">Редактировать профиль</a></p>
+            {% else %}
+                <p class="user-not-found">Пользователь не найден</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

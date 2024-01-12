@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="lecture-details-container">
+    <h1 class="lecture-title">{{ lecture.title }}</h1>
+    <p class="lecture-description">{{ lecture.description }}</p>
+    <p class="lecture-info">{{ lecture.info }}</p>
+    <button class="custom-lecture-link"><a href="{{ lecture.video_url }}">Смотреть видео</a></button><br>
+    <br>
+    <a class="custom-assignment-link" href="{{ lecture.assignment_link }}" target="_blank">Перейти к заданию</a>
+    <br>
+    <button class="custom-lecture-link"><a class="back-link" href="{% url 'lecture_list' %}">Вернутся к списку лекций</a></button>
+</div>
+{% endblock %}
